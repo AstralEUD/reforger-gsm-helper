@@ -1,0 +1,50 @@
+# Reforger GSM Helper - .gitignore
+
+# Helper directory with all generated files
+reforger-gsm-helper/
+
+# Settings and configuration files
+settings.json
+settings.example.json
+
+# Backup and batch files
+*.bak
+*_batch_*.json
+*_original.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+
+# Log files
+*.log
+
+# Node modules (if any)
+node_modules/
+
+# Python cache (if any)
+__pycache__/
+*.pyc
+*.pyo
+
+# Archives
+*.zip
+*.tar.gz
+*.rar

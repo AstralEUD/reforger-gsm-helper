@@ -1,0 +1,175 @@
+{
+  "bindAddress": "10.250.1.2",
+  "bindPort": 2001,
+  "publicAddress": "",
+  "publicPort": 2001,
+  "a2s": {
+    "address": "10.250.1.2",
+    "port": 17777
+  },
+  "rcon": {
+    "address": "0.0.0.0",
+    "port": 25181,
+    "password": "ASTROrCon!@18",
+    "permission": "monitor",
+    "blacklist": [],
+    "whitelist": [],
+    "maxClients": 16
+  },
+  "game": {
+    "name": "[KOR/\uD55C\uAD6D] ASTRO #1 | PvE Conflict | PC | Xbox discord.gg/drXxj3PmyG ",
+    "password": "",
+    "passwordAdmin": "KimchiGuys2684!",
+    "admins": [
+      "76561198410762116"
+    ],
+    "scenarioId": "{745B90A5BB761C18}Missions/ConflictPVERemixedVanilla2RHS_US.conf",
+    "maxPlayers": 64,
+    "visible": true,
+    "crossPlatform": false,
+    "supportedPlatforms": [
+      "PLATFORM_PC"
+    ],
+    "gameProperties": {
+      "serverMaxViewDistance": 1600,
+      "serverMinGrassDistance": 50,
+      "networkViewDistance": 1500,
+      "disableThirdPerson": false,
+      "fastValidation": true,
+      "battlEye": true,
+      "VONDisableUI": false,
+      "VONDisableDirectSpeechUI": false,
+      "VONCanTransmitCrossFaction": false,
+      "missionHeader": {
+        "m_sName": "ASTRO RHS PvE Conflict",
+        "m_sAuthor": "Astral",
+        "m_sDescription": "Casual RHS PvE Conflict, Check out Discord discord.gg/drXxj3PmyG",
+        "m_sDetails": "Casual RHS PvE Conflict, Check out Discord discord.gg/drXxj3PmyG",
+        "m_iPlayerCount": 64,
+        "m_bIsSavingEnabled": true,
+        "m_sSaveFileName": "ASTROConflict_Save"
+      }
+    },
+    "mods": [
+      {
+        "modId": "6266DCA9193C705E",
+        "name": "Anizay",
+        "required": true
+      },
+      {
+        "modId": "5DBD560C5148E1DA",
+        "name": "ACE Carrying",
+        "required": true
+      },
+      {
+        "modId": "606C369BAC3F6CC3",
+        "name": "ACE Finger",
+        "required": true
+      },
+      {
+        "modId": "60EAEA0389DB3CC2",
+        "name": "ACE Trenches",
+        "required": true
+      },
+      {
+        "modId": "62CCD69DD17E4F2F",
+        "name": "AKI CORE",
+        "required": true
+      },
+      {
+        "modId": "61ECB5EFAA346151",
+        "name": "TacticalAnimationOverhaul TEST",
+        "required": true
+      },
+      {
+        "modId": "6198EC294DEC63C0",
+        "name": "Bacon Parachute",
+        "required": true
+      },
+      {
+        "modId": "622120A5448725E3",
+        "name": "Bacon Zombies",
+        "required": true
+      },
+      {
+        "modId": "5C9758250C8C56F1",
+        "name": "Bon Action Animations",
+        "required": true
+      },
+      {
+        "modId": "64EE818E08AFCF94",
+        "name": "MFD Framework",
+        "required": true
+      },
+      {
+        "modId": "65388A764E534D7B",
+        "name": "Dap Rank Fix",
+        "required": true
+      },
+      {
+        "modId": "5F2944B7474F043F",
+        "name": "Disable Game Master Budgets",
+        "required": true
+      },
+      {
+        "modId": "60B2AD8092C4C94A",
+        "name": "Disable GM Dynamic Simulation",
+        "required": true
+      },
+      {
+        "modId": "653A0BF5DCC0F1FB",
+        "name": "Fluffin AH-6M Config",
+        "required": true
+      },
+      {
+        "modId": "5CE334EA7649C7CC",
+        "name": "Game Master Safe Zones",
+        "required": true
+      },
+      {
+        "modId": "5D0551624969C92E",
+        "name": "Zeliks Character",
+        "required": true
+      },
+      {
+        "modId": "62FCEB51DF8527B6",
+        "name": "Improved Blood Effect",
+        "required": true
+      },
+      {
+        "modId": "5C721177A220B42F",
+        "name": "Joint Light Tactical Vehicle",
+        "required": true
+      },
+      {
+        "modId": "62113AA293414DBA",
+        "name": "Keep Ragdoll Pose",
+        "required": true
+      },
+      {
+        "modId": "5F1EE615E7AE3106",
+        "name": "BGONE",
+        "required": true
+      },
+      {
+        "modId": "5EED4468698C0257",
+        "name": "MEP civil",
+        "required": true
+      }
+    ],
+    "modsRequiredByDefault": true
+  },
+  "operating": {
+    "lobbyPlayerSynchronise": true,
+    "playerSaveTime": 120,
+    "aiLimit": -1,
+    "slotReservationTimeout": 150,
+    "disableNavmeshStreaming": [],
+    "disableServerShutdown": false,
+    "disableCrashReporter": false,
+    "disableAI": false,
+    "joinQueue": {
+      "maxSize": 0
+    }
+  }
+}
