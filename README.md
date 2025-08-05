@@ -2,7 +2,7 @@
 
 A powerful CLI tool suite for LinuxGSM (Arma Reforger) server management, featuring comprehensive mod batch management capabilities.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20WSL-blue)](https://github.com/AstralEUD/reforger-gsm-helper)
 
 **🇺🇸 English Version** | [🇰🇷 한국어 버전](README_KR.md)
@@ -265,13 +265,18 @@ We welcome contributions! Here's how you can help improve this project:
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE](LICENSE) file for details.
 
-### MIT License Summary:
+### GNU GPL v3 License Summary:
 - ✅ Commercial use allowed
 - ✅ Modification allowed
 - ✅ Distribution allowed
 - ✅ Private use allowed
+- ✅ Patent use allowed
+- ⚠️ Must include license and copyright notice
+- ⚠️ Must state changes made to the code
+- ⚠️ Must disclose source code
+- ⚠️ Same license must be used for derivatives
 - ❌ No warranty provided
 - ❌ No liability
 

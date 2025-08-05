@@ -2,7 +2,7 @@
 
 LinuxGSM (Arma Reforger) 서버 관리를 위한 강력한 CLI 도구 모음으로, 포괄적인 모드 배치 관리 기능을 제공합니다.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20WSL-blue)](https://github.com/AstralEUD/reforger-gsm-helper)
 
 [🇺🇸 English Version](README.md) | **🇰🇷 한국어 버전**
@@ -265,13 +265,18 @@ wsl --set-default-version 2
 
 ## 📄 라이선스
 
-이 프로젝트는 **MIT 라이선스** 하에 라이선스됩니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 **GNU General Public License v3.0** 하에 라이선스됩니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
-### MIT 라이선스 요약:
+### GNU GPL v3 라이선스 요약:
 - ✅ 상업적 사용 허용
 - ✅ 수정 허용
 - ✅ 배포 허용
 - ✅ 개인적 사용 허용
+- ✅ 특허 사용 허용
+- ⚠️ 라이선스 및 저작권 고지 포함 필수
+- ⚠️ 코드 변경사항 명시 필수
+- ⚠️ 소스 코드 공개 필수
+- ⚠️ 파생작업에 동일한 라이선스 사용 필수
 - ❌ 보증 제공 안함
 - ❌ 책임 없음
 
