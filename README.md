@@ -20,6 +20,7 @@ A comprehensive CLI tool for managing Arma Reforger server mods in batches. This
 - ⚙️ **Flexible Configuration**: Customizable paths for config files and addon directories
 - 📅 **Date-based Organization**: Organizes batch files by date for easy management
 - 🔧 **Advanced Options**: 
+  - Clean addons directory (Menu 97)
   - Batch size adjustment (Menu 98)
   - Batch recreation (Menu 99)
   - Easy exit (q)
@@ -88,10 +89,14 @@ When you run the tool for the first time, it will guide you through the setup pr
 The tool follows a systematic approach to manage your mod configurations:
 
 1. **🔍 Mod Detection**: Scans your `armaserver_config.json` and analyzes total mod count
-2. **📦 Smart Batch Creation**: Creates multiple progressive config files with incremental mod counts
+2. **📦 Smart Batch Creation**: Creates multiple **cumulative** config files with incremental mod counts
+   - Batch 1: First 10 mods (1-10)
+   - Batch 2: First 20 mods (1-20) 
+   - Batch 3: First 30 mods (1-30)
+   - And so on...
 3. **📅 Daily Organization**: Stores all batches in date-organized folders for easy tracking
 4. **🎮 Interactive Selection**: Provides an intuitive menu system for configuration switching
-5. **🧹 Automatic Cleanup**: Cleans addon directory and applies selected configuration seamlessly
+5. **🧹 Optional Cleanup**: Allows manual addon directory cleaning when needed
 
 ## 🎮 Menu Options
 
@@ -100,6 +105,7 @@ The tool provides an intuitive menu system with various options:
 ### Main Menu Options:
 - **0**: 🔄 Restore original configuration (all mods)
 - **1-N**: 📦 Apply batch configurations (N = number of batches created)
+- **97**: 🧹 Clean addons directory (optional addon removal)
 - **98**: ⚙️ Change batch size settings
 - **99**: 🔄 Recreate all batches with current settings
 - **q**: 🚪 Exit the application
@@ -130,6 +136,7 @@ Let's say you have 40 mods in your config with a batch size of 10:
  4) 📦 Batch 4 (40 mods)
 
 Advanced Options:
+97) 🧹 Clean addons directory
 98) ⚙️  Change batch size
 99) 🔄 Recreate batches
  q) 🚪 Exit
@@ -137,7 +144,7 @@ Advanced Options:
 Enter your choice: 2
 ```
 
-Selecting `2` will apply the first 20 mods and automatically clean the addon directory.
+Selecting `2` will apply the first 20 mods. You can then use option `97` to clean the addon directory if needed.
 
 ## 📁 Directory Structure
 

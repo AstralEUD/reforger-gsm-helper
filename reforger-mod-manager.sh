@@ -208,21 +208,72 @@ count_mods() {
     jq '.game.mods | length' "$config_file"
 }
 
-# Clean addons directory
+# Clean addons directory with user confirmation
 clean_addons() {
+    print_separator
+    print_box "Clean Addons Directory" "Remove all files from addons folder"
+    
     if [ -d "$ADDONS_PATH" ]; then
-        print_step "Cleaning addons directory: ${FOLDER} $ADDONS_PATH"
-        # Use find for safer deletion, avoid issues with special characters
-        find "$ADDONS_PATH" -mindepth 1 -delete 2>/dev/null || {
-            # Fallback method if find fails
-            rm -rf "${ADDONS_PATH:?}"/* 2>/dev/null || true
-        }
-        print_success "Addons directory cleaned"
+        # Show current addons directory contents
+        local addon_count=$(find "$ADDONS_PATH" -mindepth 1 2>/dev/null | wc -l)
+        echo -e "${CYAN}${FOLDER} Addons Directory:${NC} $ADDONS_PATH"
+        echo -e "${CYAN}📦 Items Found:${NC} ${BOLD}$addon_count${NC} files/folders"
+        
+        if [ "$addon_count" -eq 0 ]; then
+            print_info "Addons directory is already empty"
+            return
+        fi
+        
+        echo ""
+        echo -e "${YELLOW}⚠️  Warning: This will delete ALL contents in the addons directory!${NC}"
+        echo -e "${YELLOW}   This action cannot be undone.${NC}"
+        echo ""
+        
+        while true; do
+            echo -n "Do you want to proceed? [y/N]: "
+            read -r confirm
+            case "$confirm" in
+                [Yy]|[Yy][Ee][Ss])
+                    print_step "Cleaning addons directory: ${FOLDER} $ADDONS_PATH"
+                    # Use find for safer deletion, avoid issues with special characters
+                    if find "$ADDONS_PATH" -mindepth 1 -delete 2>/dev/null; then
+                        print_success "Addons directory cleaned successfully"
+                    else
+                        # Fallback method if find fails
+                        if rm -rf "${ADDONS_PATH:?}"/* 2>/dev/null; then
+                            print_success "Addons directory cleaned successfully (fallback method)"
+                        else
+                            print_error "Failed to clean addons directory"
+                            return 1
+                        fi
+                    fi
+                    break
+                    ;;
+                [Nn]|[Nn][Oo]|"")
+                    print_info "Addons directory cleaning cancelled"
+                    break
+                    ;;
+                *)
+                    echo "Please answer yes (y) or no (n)"
+                    ;;
+            esac
+        done
     else
         print_warning "Addons directory does not exist: ${FOLDER} $ADDONS_PATH"
-        mkdir -p "$ADDONS_PATH"
-        print_success "Created addons directory: ${FOLDER} $ADDONS_PATH"
+        echo -n "Do you want to create it? [y/N]: "
+        read -r create_confirm
+        case "$create_confirm" in
+            [Yy]|[Yy][Ee][Ss])
+                mkdir -p "$ADDONS_PATH"
+                print_success "Created addons directory: ${FOLDER} $ADDONS_PATH"
+                ;;
+            *)
+                print_info "Directory creation cancelled"
+                ;;
+        esac
     fi
+    
+    print_separator
 }
 
 # Create backup and batch files
@@ -257,22 +308,27 @@ create_batches() {
     
     # Create batch files
     for ((i=1; i<=num_batches; i++)); do
-        local start_index=$(( (i-1) * BATCH_SIZE ))
+        # For cumulative batches: each batch contains mods from 1 to (i * BATCH_SIZE)
         local end_index=$(( i * BATCH_SIZE ))
+        
+        # Ensure we don't exceed total mods
+        if [ "$end_index" -gt "$total_mods" ]; then
+            end_index=$total_mods
+        fi
         
         # Create batch config file (these will be renamed to armarserver_config.json when applied)
         local batch_file="$batch_dir/armarserver_config_batch_$i.json"
         
-        # Use jq to create a new config with limited mods
-        if ! jq --argjson start "$start_index" --argjson end "$end_index" \
-           '.game.mods = (.game.mods | .[$start:$end])' \
+        # Use jq to create a new config with cumulative mods from start (0) to end_index
+        if ! jq --argjson end "$end_index" \
+           '.game.mods = (.game.mods | .[:$end])' \
            "$CONFIG_PATH" > "$batch_file"; then
             print_error "Failed to create batch file $i"
             continue
         fi
         
         local batch_mod_count=$(count_mods "$batch_file")
-        print_success "Batch $i: ${BOLD}$batch_mod_count mods${NC} (mods $((start_index + 1))-$((start_index + batch_mod_count)))"
+        print_success "Batch $i: ${BOLD}$batch_mod_count mods${NC} (mods 1-$batch_mod_count)"
     done
     
     echo ""
@@ -318,6 +374,7 @@ list_batches() {
     done
     
     echo ""
+    echo -e "${CYAN}${BOLD}97)${NC} ${ARROW} ${CYAN}Clean addons directory (remove all addon files)${NC}"
     echo -e "${PURPLE}${BOLD}98)${NC} ${ARROW} ${PURPLE}Change batch size (currently: $BATCH_SIZE mods per batch)${NC}"
     echo -e "${YELLOW}${BOLD}99)${NC} ${ARROW} ${YELLOW}Recreate all batches (rebuild from current config)${NC}"
     echo ""
@@ -409,7 +466,7 @@ apply_batch() {
                 local mod_count=$(count_mods "$CONFIG_PATH")
                 print_success "Original config restored with ${BOLD}$mod_count mods${NC}"
                 print_step "File copied: armarserver_config_original.json.bak ${ARROW} armarserver_config.json"
-                clean_addons
+                print_info "Note: Use menu option 97 to clean addons directory if needed"
             else
                 print_error "Failed to restore original config"
                 return 1
@@ -426,7 +483,7 @@ apply_batch() {
                 local mod_count=$(count_mods "$CONFIG_PATH")
                 print_success "Applied batch $selection with ${BOLD}$mod_count mods${NC}"
                 print_step "File copied: armarserver_config_batch_$selection.json ${ARROW} armarserver_config.json"
-                clean_addons
+                print_info "Note: Use menu option 97 to clean addons directory if needed"
             else
                 print_error "Failed to apply batch $selection"
                 return 1
@@ -446,7 +503,7 @@ interactive_selection() {
         list_batches
         
         echo -e "${CYAN}${BOLD}Please select a configuration to apply:${NC}"
-        echo -n "Enter your choice (0 for original, 98-99 for options, q to exit): "
+        echo -n "Enter your choice (0 for original, 97-99 for options, q to exit): "
         read -r selection
         
         # Handle exit
@@ -456,7 +513,10 @@ interactive_selection() {
         fi
         
         # Handle special options
-        if [ "$selection" = "98" ]; then
+        if [ "$selection" = "97" ]; then
+            clean_addons
+            continue  # Return to menu after cleaning addons
+        elif [ "$selection" = "98" ]; then
             change_batch_size
             continue  # Return to menu after changing batch size
         elif [ "$selection" = "99" ]; then
@@ -467,7 +527,7 @@ interactive_selection() {
         # Validate numeric input
         if [[ ! "$selection" =~ ^[0-9]+$ ]]; then
             echo ""
-            print_error "Please enter a valid number, 98, 99, or 'q' to exit"
+            print_error "Please enter a valid number, 97-99, or 'q' to exit"
             echo ""
             continue
         fi
@@ -481,7 +541,7 @@ interactive_selection() {
             break
         else
             echo ""
-            print_error "Invalid selection. Please choose between 0 and $max_batches, 98-99 for options, or 'q' to exit"
+            print_error "Invalid selection. Please choose between 0 and $max_batches, 97-99 for options, or 'q' to exit"
             echo ""
         fi
     done
