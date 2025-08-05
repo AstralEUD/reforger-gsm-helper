@@ -215,19 +215,7 @@ ls -la reforger-mod-manager.sh
 - Ensure Arma Reforger server is properly installed
 - Check if config file exists: `ls -la /armarserver/serverfiles/armaserver_config.json`
 
-#### 4. **WSL Issues (Windows Users)**
-```powershell
-# Install WSL if not already installed
-wsl --install
-
-# Update WSL
-wsl --update
-
-# Set default WSL version
-wsl --set-default-version 2
-```
-
-#### 5. **Batch Creation Fails**
+#### 4. **Batch Creation Fails**
 - Ensure sufficient disk space
 - Check write permissions in target directory
 - Verify JSON syntax in original config file
@@ -245,47 +233,10 @@ If you encounter issues not covered above:
    - Steps to reproduce the issue
    - Your `settings.json` configuration (remove sensitive paths)
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help improve this project:
-
-### Ways to Contribute:
-- 🐛 **Report Bugs**: Submit detailed bug reports with reproduction steps
-- 💡 **Feature Requests**: Suggest new features or improvements
-- 📝 **Documentation**: Help improve documentation and examples
-- 💻 **Code Contributions**: Submit pull requests with bug fixes or new features
-- 🌐 **Translations**: Help translate documentation to other languages
-
-### Development Setup:
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and test thoroughly
-4. Commit with clear messages: `git commit -m "Add: description of changes"`
-5. Push to your fork: `git push origin feature/your-feature-name`
-6. Create a Pull Request
-
-### Code Guidelines:
-- Follow existing code style and conventions
-- Add comments for complex logic
-- Test your changes on both Linux and WSL
-- Update documentation for new features
 
 ## 📄 License
 
 This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE](LICENSE) file for details.
-
-### GNU GPL v3 License Summary:
-- ✅ Commercial use allowed
-- ✅ Modification allowed
-- ✅ Distribution allowed
-- ✅ Private use allowed
-- ✅ Patent use allowed
-- ⚠️ Must include license and copyright notice
-- ⚠️ Must state changes made to the code
-- ⚠️ Must disclose source code
-- ⚠️ Same license must be used for derivatives
-- ❌ No warranty provided
-- ❌ No liability
 
 ---
 
